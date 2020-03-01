@@ -1,13 +1,13 @@
- #C++ʵ�ֵ��������ݽṹ
-Skip List����Ծ������һ��֧�ֿ��ٲ��ҵ����ݽṹ�����롢���Һ�ɾ������������ֻ��ҪO(log n)���������ʱ�临�Ӷȣ�����Ч�����������������ȶ���ƽ�������Ტ�ۣ�����ʵ�ֵ��Ѷ�Ҫ�Ⱥ�����򵥶��ˡ�
+# C++实现的跳表数据结构类
+Skip List（跳跃表）是一种支持快速查找的数据结构，插入、查找和删除操作都仅仅只需要O(log n)对数级别的时间复杂度，它的效率甚至可以与红黑树等二叉平衡树相提并论，而且实现的难度要比红黑树简单多了。
 
-ʵ�ֵĹ����п������ϵĺܶ����ӣ���β��룬�еķ������������ĸ�ָ�롣�����Ľṹ�ڲ��ҵ�ʱ��ֻ��Ҫ���Һ��������������ƶ��ͺ��ˣ��������ʵ�ֹ�����ֻ����һ��һά���顣�����������汾�ĵ�����
-V1��skiplist_v2.h��ÿ�������ڵ��������㼶ʹ�ö�̬���飬ֱ���õ�vector����������ˣ�
-V2��skiplist_v1.h���鿴��levelDBԴ�룬�Բ�������������Ż���
-V3��skiplist.h��ʹ�ö�̬�����ڴ淽ʽ�滻��vector������
+实现的过程中看了网上的很多例子，层次不齐，有的放了上下左右四个指针。跳表的结构在查找的时候只需要向右和向下两个方向移动就好了，因此我在实现过程中只放了一个一维数组。经历了三个版本的迭代。
+1：skiplist_v2.h，每个跳表节点中跳表层级使用动态数组，直接用的vector容器，最简单了；
+2：skiplist_v1.h，查看了levelDB源码，对插入操作进行了优化；
+3：skiplist.h，使用动态申请内存方式替换掉vector容器。
 
-![�����ṹ](https://raw.githubusercontent.com/JelinYao/skiplist/master/img/insert.png "�����ṹ")
-##������������key
+![跳表结构](https://raw.githubusercontent.com/JelinYao/skiplist/master/img/insert.png "跳表结构")
+##测试整形数据key
 ```cpp
 int TestIntSkipList()
 {
@@ -62,7 +62,7 @@ int TestIntSkipList()
  
 ```
 ![](https://raw.githubusercontent.com/JelinYao/skiplist/master/img/int.png)
-##�����ַ������͵�key
+##测试字符串类型的key
 ```cpp
 int TestStrSkipList()
 {
